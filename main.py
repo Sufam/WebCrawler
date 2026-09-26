@@ -1,7 +1,7 @@
 import bs4
 import requests
 import json
-
+import os
 
 def change():
     global information
@@ -26,9 +26,9 @@ def change():
 
 
 def update(datas):
-    API_token = ""
     url = 'https://api.line.me/v2/bot/message/broadcast'
-    token = API_token
+    token = os.getenv("API_token")
+
 
     update_Date = ""
     message = ""
