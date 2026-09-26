@@ -14,12 +14,12 @@ sys.stderr.reconfigure(line_buffering=True)
 
 app = Flask(__name__)
 
-# 從環境變數讀取 Token 與 Secret
-CHANNEL_ACCESS_TOKEN = os.getenv("API_token")
-CHANNEL_SECRET = os.getenv("secret")
+#Read Token and Secret from env
+channelAccessToken = os.getenv("API_token")
+channelSecret = os.getenv("secret")
 
-line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
-handler = WebhookHandler(CHANNEL_SECRET)
+line_bot_api = LineBotApi(channelAccessToken)
+handler = WebhookHandler(channelSecret)
 
 def getData():
     datas = {}
@@ -44,7 +44,7 @@ def getData():
         
     return datas
 
-@app.route("/", methods=['POST'])
+@app.route("/", methods=['GET', 'POST'])
 def callback():
     signature = request.headers.get('X-Line-Signature', '')
     body = request.get_data(as_text=True)
@@ -59,7 +59,7 @@ def callback():
 
     return 'OK', 200
 
-# 綁定文字訊息事件處理
+# Message process
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     user_msg = event.message.text
