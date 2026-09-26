@@ -1,9 +1,12 @@
-import bs4, requests, json, os
+import bs4, requests, json, os, sys
 from flask import Flask, request
 
 # 載入 LINE Message API 相關函式庫
 from linebot import LineBotApi, WebhookHandler
 from linebot.models import TextSendMessage
+
+sys.stdout.reconfigure(line_buffering=True)
+sys.stderr.reconfigure(line_buffering=True)
 
 def getData():
     global information
