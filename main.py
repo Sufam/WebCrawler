@@ -46,6 +46,9 @@ def getData():
 
 @app.route("/", methods=['GET', 'POST'])
 def callback():
+    if request.method == 'GET':
+        return 'Line Bot Server is running!', 200
+
     signature = request.headers.get('X-Line-Signature', '')
     body = request.get_data(as_text=True)
 
