@@ -31,7 +31,7 @@ def getData():
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=['POST'])
 def sendMessage():
     token = os.getenv("API_token")
     channel_Secret =os.getenv("secret")
@@ -66,7 +66,7 @@ def sendMessage():
     except:
         print(body)
 
-    return
+    return 'OK', 200
  
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
